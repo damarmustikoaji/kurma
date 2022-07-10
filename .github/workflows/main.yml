@@ -1,4 +1,4 @@
-name: Automation Testing
+name: K6 Load Test
 
 on:
   push:
@@ -9,17 +9,13 @@ on:
     - cron:  '30 07 * * 1-5'
   
 jobs:
-  testing:
+  k6_load_test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Adding gpg key
-      run: gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
-    - name: Adding source list repository linux
-      run: echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
-    - name: Updating
-      run: apt-get update
-    - name: Installing
-      run: apt-get install k6
-    - name: Running Test
-      run: k6 run test_servis.js
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Run local k6 test
+      uses: grafana/k6-action@v0.2.0
+      with:
+        filename: test_servis.js
