@@ -3,10 +3,8 @@ name: K6 Load Test
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
   schedule:
-    - cron:  '30 07 * * 1-5'
+    - cron:  '0 19 * * *'
   
 jobs:
   k6_load_test:
