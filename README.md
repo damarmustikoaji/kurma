@@ -1,3 +1,5 @@
+[![K6 Load Test](https://github.com/damarmustikoaji/kurma/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/damarmustikoaji/kurma/actions/workflows/main.yml)
+
 ### Documents
 https://k6.io/docs/testing-guides/api-load-testing/
 
