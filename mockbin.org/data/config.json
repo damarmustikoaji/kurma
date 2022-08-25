@@ -1,0 +1,9 @@
+{
+    "url": "http://mockbin.org/bin",
+    "path": {
+        "post": "/dd322b53-fffe-4245-9a9f-af4c0bee9f92"
+    },
+    "user": 100,
+    "startUser": 20,
+    "duration": "1s"
+}

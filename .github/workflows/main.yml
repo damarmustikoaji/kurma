@@ -16,4 +16,4 @@ jobs:
     - name: Run local k6 test
       uses: grafana/k6-action@v0.2.0
       with:
-        filename: test_servis.js
+        filename: ./mockbin.org/mockbin.org_post_test.js
