@@ -27,7 +27,7 @@ const metricTags = {
 /* Test Configuration */
 const user = dataConfig.user;
 //mengalokasikan jumlah VU sebelum memulai tes
-const startUser = dataConfig.startUser; //seperlima dari rate 10->2, 20->4, 25->5, 30->6, 50->10, 100->20, 200->40
+const startUser = user * 0.2; //dataConfig.startUser; //seperlima dari rate 10->2, 20->4, 25->5, 30->6, 50->10, 100->20, 200->40
 const duration = dataConfig.duration; //'1s' or '1m'
 
 export let options = {
@@ -53,16 +53,20 @@ export let options = {
 
     // Acceptance Criteria
     thresholds: {
-        [`http_req_duration${JSON.stringify(metricTags.endpoint)}`]: ['max<30000'],
-        [`http_not_201${JSON.stringify(metricTags.endpoint)}`]: ['count<1'],
-        'iterations_error_rate': [{
+        http_req_duration: ['max<1000'], //requests should be below 1000ms (1s)
+        http_req_failed: ['rate<0.01'], //http errors should be less than 1%
+        http_req_waiting: ['max<1000'],
+        http_req_waiting: ['max<1000'],
+        http_not_201: ['count<1'],
+        iterations_error_rate: [{
             threshold: 'rate<0.1',
             abortOnFail: true
-        }]
+        }],
+        iterations_failed: ['count<1'],
     },
 
     // Trend Report
-    summaryTrendStats: ['avg', 'p(95)', 'p(99)', 'max']
+    summaryTrendStats: ['avg', 'max', 'p(99)', 'p(90)', 'p(50)']
 };
 
 /* Test Scenario */
